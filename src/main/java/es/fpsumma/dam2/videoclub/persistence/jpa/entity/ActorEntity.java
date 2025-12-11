@@ -1,32 +1,29 @@
 package es.fpsumma.dam2.videoclub.persistence.jpa.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "director")
-public class DirectorEntity {
-
+@Table(name = "actor")
+public class ActorEntity {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nombre")
+    @Column
     private String nombre;
 
-    // Añadir relación con Lista de películas
-
-
-    // ===== Constructores =====
-    public DirectorEntity(Long id, String nombre) {
+    public ActorEntity(Long id, String nombre) {
         this.id = id;
         this.nombre = nombre;
     }
 
-    public DirectorEntity() {
-    }
-
-
-    // ===== Getters y setters =====
+    public ActorEntity(){}
 
     public Long getId() {
         return id;
@@ -43,5 +40,4 @@ public class DirectorEntity {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
 }
