@@ -19,4 +19,5 @@ public interface DirectorRepository extends JpaRepository<DirectorEntity, Long> 
     @Query("SELECT d FROM DirectorEntity d WHERE d.nombre = :nombre")
     Optional<DirectorEntity> buscarPorNombre(@Param("nombre") String nombre);
 
+    List<DirectorEntity> findAllByOrderByNombreAsc();
 }

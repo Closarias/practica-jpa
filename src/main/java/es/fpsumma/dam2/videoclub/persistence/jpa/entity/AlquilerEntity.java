@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -17,11 +19,13 @@ public class AlquilerEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "cliente_id")
-    private Long clienteId;
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
+    private ClienteEntity clienteAlquiler;
 
-    @Column(name = "pelicula_id")
-    private Long peliculaId;
+    @ManyToOne
+    @JoinColumn(name = "pelicula_id")
+    private PeliculaEntity peliculaAlquiler;
 
     @Column(name = "fecha_alquiler")
     private Date fechaAlquiler;
@@ -31,13 +35,9 @@ public class AlquilerEntity {
 
     public AlquilerEntity(
         Long id, 
-        Long clienteId, 
-        Long peliculaId, 
         Date fechaAlquiler, 
         Date fechaDevolucion){
             this.id = id;
-            this.clienteId = clienteId;
-            this.peliculaId = peliculaId;
             this.fechaAlquiler = fechaAlquiler;
             this.fechaDevolucion = fechaDevolucion;
         }
@@ -50,22 +50,6 @@ public class AlquilerEntity {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getClienteId() {
-        return clienteId;
-    }
-
-    public void setClienteId(Long clienteId) {
-        this.clienteId = clienteId;
-    }
-
-    public Long getPeliculaId() {
-        return peliculaId;
-    }
-
-    public void setPeliculaId(Long peliculaId) {
-        this.peliculaId = peliculaId;
     }
 
     public Date getFechaAlquiler() {

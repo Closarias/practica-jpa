@@ -1,10 +1,17 @@
 package es.fpsumma.dam2.videoclub.persistence.jpa.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -15,10 +22,10 @@ public class PeliculaEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column (nullable = false, length = 200)
     private String titulo;
 
-    @Column
+    @Column (length = 50)
     private String genero;
 
     @Column(name = "anio_estreno")
@@ -27,8 +34,15 @@ public class PeliculaEntity {
     @Column
     private Float puntuacion;
 
-    @Column(name = "director_id")
-    private Long directorId;
+    @ManyToOne
+    @JoinColumn(name = "director_id")
+    private DirectorEntity directorPeli;
+
+    @ManyToMany(mappedBy = "estudiante")
+    private List<ActorEntity> actores = new ArrayList<>();
+
+    @OneToMany(mappedBy = "pelicula")
+    private List<AlquilerEntity> alquileres = new ArrayList<>();
 
     public PeliculaEntity(
         Long id, 
